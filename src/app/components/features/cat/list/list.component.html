@@ -1,0 +1,63 @@
+<div class="cat-container">
+  <mat-accordion>
+    @for (catItem of cats; track catItem.id) {
+    <mat-expansion-panel hideToggle (opened)="openPanel(catItem.id)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ catItem.name }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      @if (cat) {
+      <div class="cat-details">
+        <div class="cat-carousel">
+          @if (catImages.length === 0 && catItem.id === cat.id) {
+          <div class="cat-spinner-container">
+            <mat-spinner></mat-spinner>
+          </div>
+          }
+          <owl-carousel-o [options]="carouselOptions">
+            @for (image of catImages; track image.id) {
+            <ng-container>
+              <ng-template carouselSlide>
+                <img [src]="image.url" alt="" class="carousel-img" />
+              </ng-template>
+            </ng-container>
+            }
+          </owl-carousel-o>
+        </div>
+        <div class="cat-info">
+          <h3>Características</h3>
+          <ul>
+            <li><strong>Origen:</strong> {{ cat.origin }}</li>
+            <li><strong>Descripción:</strong> {{ cat.description }}</li>
+            <li>
+              <strong>Esperanza de vida:</strong> {{ cat.life_span }} años
+            </li>
+            <li><strong>Temperamento:</strong> {{ cat.temperament }}</li>
+            <li>
+              <strong>Nivel de inteligencia:</strong> {{ cat.intelligence }}/5
+            </li>
+            <li><strong>Nivel de energía:</strong> {{ cat.energy_level }}/5</li>
+            <li>
+              <strong>Amigable con niños:</strong> {{ cat.child_friendly }}/5
+            </li>
+            <li>
+              <strong>Amigable con perros:</strong> {{ cat.dog_friendly }}/5
+            </li>
+            <li>
+              <strong>Hipoalergénico:</strong>
+              {{ cat.hypoallergenic ? "Sí" : "No" }}
+            </li>
+            <li>
+              <strong>Más información: </strong>
+              <a [href]="cat.wikipedia_url" target="_blank">Wikipedia</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      }
+    </mat-expansion-panel>
+    }
+  </mat-accordion>
+</div>
