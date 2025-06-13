@@ -1,0 +1,47 @@
+<mat-toolbar class="custom-toolbar">
+  <img
+    src="https://xpertgroup.co/wp-content/uploads/2022/12/xpert-group-consultoria-tecnologica.webp"
+    alt="Logo"
+    class="toolbar-logo"
+  />
+  <span class="toolbar-spacer"></span>
+  <nav class="toolbar-tabs">
+    <a mat-button routerLink="/cats" routerLinkActive="active-tab">Lista</a>
+    <a mat-button routerLink="/cat-list" routerLinkActive="active-tab"
+      >Tabla</a
+    >
+  </nav>
+  <ngx-avatars [name]="user?.name" [matMenuTriggerFor]="menu"></ngx-avatars>
+</mat-toolbar>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="openDialog()">
+    <mat-icon aria-hidden="false" fontIcon="person"></mat-icon>Datos del usuario
+  </button>
+  <button mat-menu-item routerLink="/login">
+    <mat-icon
+      aria-hidden="false"
+      fontIcon="logout"
+      class="logout-icon"
+    ></mat-icon>
+    Cerrar sesión
+  </button>
+</mat-menu>
+
+<ng-template #UserDialog>
+  <div class="user-dialog-content">
+    <h2>Información del Usuario</h2>
+    <mat-divider></mat-divider>
+    @if (user) {
+    <ul class="user-info-list">
+      <li><strong>Nombre:</strong> {{ user.name }}</li>
+      <li><strong>Email:</strong> {{ user.email }}</li>
+      <li><strong>Rol:</strong> {{ user.role }}</li>
+      <li>
+        <span><strong>Estado: </strong> <p [ngClass]="{'text-success': user.isActive, 'text-danger': !user.isActive}">{{ user.isActive ? "Activo" : "Inactivo" }}</p></span>
+      </li>
+      <li><strong>Creado:</strong> {{ parseDate(user.createdAt) }}</li>
+      <li><strong>Actualizado:</strong> {{ parseDate(user.updatedAt) }}</li>
+    </ul>
+    }
+  </div>
+</ng-template>

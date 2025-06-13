@@ -15,6 +15,7 @@ import { HttpUserService } from '@services/index';
 import { StorageService } from '@services/index';
 import { User } from 'src/app/models/user.model';
 import { Router } from '@angular/router';
+import { AuthService } from '@services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
   _snackBar = inject(MatSnackBar);
   userService = inject(HttpUserService);
   storageService = inject(StorageService);
+  authService = inject(AuthService);
 
   loginView = true;
 
@@ -55,6 +57,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.storageService.removeToken();
     this.storageService.remove('user');
+    this.authService.setAuth();
   }
 
   toggleView() {
@@ -69,11 +72,14 @@ export class LoginComponent implements OnInit {
           next: (response: { token: string; data: User }) => {
             this.storageService.setToken(response.token);
             this.storageService.set('user', response.data);
+            this.authService.setAuth();
             this.router.navigate(['/cats']);
           },
           error: (error) => {
             console.error('Login failed', error);
-            this._snackBar.open("Usuario o contraseña incorrectos", "OK", { duration: 5000 });
+            this._snackBar.open('Usuario o contraseña incorrectos', 'OK', {
+              duration: 5000,
+            });
           },
         });
     } else {
@@ -82,7 +88,7 @@ export class LoginComponent implements OnInit {
         .subscribe({
           next: () => {
             this.loginView = true;
-            this._snackBar.open("Usuario creado", "OK", { duration: 5000 });
+            this._snackBar.open('Usuario creado', 'OK', { duration: 5000 });
           },
           error: (error) => {
             console.error('Login failed', error);

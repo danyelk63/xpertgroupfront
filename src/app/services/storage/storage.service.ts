@@ -12,12 +12,13 @@ export class StorageService {
     }
   }
 
-  getToken(token: string): void {
+  getToken(): string | null {
     try {
-      sessionStorage.getItem('token');
+      return sessionStorage.getItem('token');
     } catch (error) {
       console.error('Error setting token in sessionStorage:', error);
     }
+    return null
   }
 
   removeToken(): void {

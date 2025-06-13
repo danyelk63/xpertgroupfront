@@ -2,5 +2,13 @@
 @use 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel.scss' as owl-carousel;
 @use 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default.scss' as owl-theme;
 
-html, body { height: 100%; }
+html, body { height: calc(100% - 74px); }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.text-danger {
+    color: #C82333;
+}
+
+.text-success {
+    color: #28A745;
+}

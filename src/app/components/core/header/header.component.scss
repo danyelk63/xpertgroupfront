@@ -1,0 +1,70 @@
+.custom-toolbar {
+  background: #23272f; // Color oscuro
+  color: #fff;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.toolbar-logo {
+  height: 40px;
+  margin-right: 16px;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.toolbar-tabs a {
+  margin: 0 8px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.toolbar-tabs a.active-tab,
+.toolbar-tabs a:hover {
+  color: #90caf9;
+  border-bottom: 2px solid #90caf9;
+  background: transparent;
+  cursor: pointer;
+}
+
+ngx-avatars {
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.logout-icon {
+  color: #DB3315;
+}
+
+.user-dialog-content {
+  min-width: 300px;
+  padding: 16px;
+  h2 {
+    margin-bottom: 12px;
+    color: #1976d2;
+  }
+  .user-info-list {
+    list-style: none;
+    padding: 0;
+    li {
+      margin-bottom: 8px;
+      font-size: 16px;
+      strong {
+        color: #333;
+      }
+    }
+  }
+}
+
+span {
+  display: flex;
+
+  p {
+    margin: 0px;
+    width: fit-content;
+  }
+}

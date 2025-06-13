@@ -15,11 +15,20 @@ export class HttpCatService {
   httpClientService: HttpClient = inject(HttpClient);
   endpointService = inject(EndpointService);
 
-  getAll() {
+  getAllNames() {
     return this.httpClientService
       .get<ICatListItem[]>(
-        this.endpointService.getUrl(this.config.url, "breeds"),
+        this.endpointService.getUrl(this.config.url, "breed-names"),
       )
+  }
+
+  getAll() {
+    return this.httpClientService
+      .get<ICat[]>(
+        this.endpointService.getUrl(this.config.url, "breeds"),
+      ).pipe(
+      map((cats: ICat[]) => cats.map(cat => new Cat(cat)))
+    );
   }
 
   get(id: string) {

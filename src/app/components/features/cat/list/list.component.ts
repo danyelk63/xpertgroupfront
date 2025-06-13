@@ -50,7 +50,7 @@ export class ListComponent implements OnInit {
   }
 
   getBreeds() {
-    this.httpCatService.getAll().subscribe({
+    this.httpCatService.getAllNames().subscribe({
       next: (cats) => {
         this.cats = cats;
       },
